@@ -7,8 +7,43 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Services\ServiceCreate.razor" />
+    <Content Remove="Pages\Services\ServicesIndex.razor" />
+    <Content Remove="Shared\GenericList.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CurrieTechnologies.Razor.SweetAlert2" Version="5.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Services\ServicesIndex.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Services\ServiceCreate.razor" />
+    <_ContentIncludedByDefault Remove="Pages\Services\ServicesIndex.razor" />
+    <_ContentIncludedByDefault Remove="Shared\GenericList.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Services\ServiceCreate.razor" />
+    <None Include="Pages\Services\ServicesIndex.razor" />
+    <None Include="Shared\GenericList.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dinamo2023.Shared\Dinamo2023.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Shared\GenericList.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Services\ServiceCreate.razor" />
   </ItemGroup>
 
 </Project>

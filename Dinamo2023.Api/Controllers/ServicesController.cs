@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Dinamo2023.Api.Data;
+using Dinamo2023.Shared.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Dinamo2023.Api.Data;
-using Dinamo2023.Shared.Entities;
 
 namespace Dinamo2023.Api.Controllers
 {
@@ -25,10 +20,10 @@ namespace Dinamo2023.Api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Service>>> GetServices()
         {
-          if (_context.Services == null)
-          {
-              return NotFound();
-          }
+            if (_context.Services == null)
+            {
+                return NotFound();
+            }
             return await _context.Services.ToListAsync();
         }
 
@@ -36,10 +31,10 @@ namespace Dinamo2023.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Service>> GetService(int id)
         {
-          if (_context.Services == null)
-          {
-              return NotFound();
-          }
+            if (_context.Services == null)
+            {
+                return NotFound();
+            }
             var service = await _context.Services.FindAsync(id);
 
             if (service == null)
@@ -85,14 +80,29 @@ namespace Dinamo2023.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<Service>> PostService(Service service)
         {
-          if (_context.Services == null)
-          {
-              return Problem("Entity set 'DataContext.Services'  is null.");
-          }
-            _context.Services.Add(service);
-            await _context.SaveChangesAsync();
+            if (_context.Services == null)
+            {
+                return Problem("Entity set 'DataContext.Services'  is null.");
+            }
+            try
+            {
+                _context.Add(service);
+                await _context.SaveChangesAsync();
+                return Ok(service);
+            }
+            catch (DbUpdateException dbUpdateException)
+            {
+                if (dbUpdateException.InnerException!.Message.Contains("duplicate"))
+                {
+                    return BadRequest("Ya existe un servicio con la misma info en bd.");
+                }
 
-            return CreatedAtAction("GetService", new { id = service.Id }, service);
+                return BadRequest(dbUpdateException.Message);
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception.Message);
+            }
         }
 
         // DELETE: api/Services/5

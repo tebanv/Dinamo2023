@@ -1,0 +1,36 @@
+﻿@page "/countries/create"
+@using CurrieTechnologies.Razor.SweetAlert2;
+@using Dinamo2023.Shared.Entities;
+@using Dinamo2023.WEB.Repositories;
+
+@inject IRepository repository
+@inject NavigationManager navigationManager
+@inject SweetAlertService sweetAlertService
+
+<h3>Crear Servicio</h3>
+
+<ServiceForm @ref="countryForm" Service="Service" OnValidSubmit="CreateAsync" ReturnAction="Return" />
+
+@code {
+    private Service Service = new();
+    private ServiceForm? countryForm;
+
+    private async Task CreateAsync()
+    {
+        var httpResponse = await repository.Post("/api/countries", Service);
+        if(httpResponse.Error)
+        {
+            var message = await httpResponse.GetErrorMessageAsync();
+            await sweetAlertService.FireAsync("Error", message, SweetAlertIcon.Error);
+            return;
+        }
+
+        Return();
+    }
+
+    private void Return()
+    {
+        countryForm!.FormPostedSuccessfully = true;
+        navigationManager.NavigateTo("/countries");
+    }
+}

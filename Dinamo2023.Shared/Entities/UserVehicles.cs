@@ -4,17 +4,16 @@ namespace Dinamo2023.Shared.Entities
 {
     public class UserVehicles
     {
+        private const string MESSAGE_FIELD_REQUIRED = "El campo {0} es obligatorio.";
         public int Id { get; set; }
 
         [Display(Name = "Id del Usuario Propietario del Vehiculo")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caractéres")]
+        [Required(ErrorMessage = MESSAGE_FIELD_REQUIRED)]
         public int IdUser { get; set; }
 
         [Display(Name = "Id del Vehiculo")]
-        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
-        [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caractéres")]
-        public string IdVehicle { get; set; } = null!;
+        [Required(ErrorMessage = MESSAGE_FIELD_REQUIRED)]
+        public int IdVehicle { get; set; }
 
     }
 }

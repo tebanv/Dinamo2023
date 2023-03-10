@@ -30,19 +30,17 @@ namespace Dinamo2023.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("IdParameterFather")
-                        .HasMaxLength(100)
+                    b.Property<int?>("IdParameterFather")
                         .HasColumnType("int");
 
                     b.Property<string>("Parameter")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ParameterAbreviature")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("ParameterDescription")
                         .IsRequired()
@@ -57,7 +55,8 @@ namespace Dinamo2023.Api.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdParameterFather")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[IdParameterFather] IS NOT NULL");
 
                     b.HasIndex("Parameter")
                         .IsUnique();
@@ -73,10 +72,8 @@ namespace Dinamo2023.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Commission")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int>("Commission")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -100,11 +97,9 @@ namespace Dinamo2023.Api.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CostService")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasMaxLength(100)
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeliveryAddress")
@@ -112,8 +107,7 @@ namespace Dinamo2023.Api.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<DateTime>("DeliveryDate")
-                        .HasMaxLength(100)
+                    b.Property<DateTime?>("DeliveryDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DeliveryInstructions")
@@ -123,47 +117,40 @@ namespace Dinamo2023.Api.Migrations
 
                     b.Property<string>("DeliveryPhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("FinalNote")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
-                    b.Property<int>("IdCourier")
-                        .HasMaxLength(100)
+                    b.Property<int?>("IdCourier")
                         .HasColumnType("int");
 
                     b.Property<int>("IdPackegeSize")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.Property<int>("IdPlan")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.Property<int>("IdServiceType")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.Property<int>("IdUser")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ModificationDate")
-                        .HasMaxLength(100)
+                    b.Property<DateTime?>("ModificationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NameDeliverer")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("NameRecipient")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("PackageInformation")
                         .IsRequired()
@@ -182,18 +169,17 @@ namespace Dinamo2023.Api.Migrations
 
                     b.Property<string>("PickUpPhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("PurchaseInformation")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("StatusService")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("Id");
 
@@ -208,20 +194,18 @@ namespace Dinamo2023.Api.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Commission")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int>("Commission")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 
@@ -241,18 +225,18 @@ namespace Dinamo2023.Api.Migrations
 
                     b.Property<string>("City")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("DocumentNumber")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("DocumentType")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("FullName")
                         .IsRequired()
@@ -260,13 +244,12 @@ namespace Dinamo2023.Api.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("IdUserType")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.HasKey("Id");
 
@@ -291,8 +274,8 @@ namespace Dinamo2023.Api.Migrations
 
                     b.Property<string>("RoleName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -311,13 +294,10 @@ namespace Dinamo2023.Api.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("IdUser")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
-                    b.Property<string>("IdVehicle")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int>("IdVehicle")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -334,24 +314,21 @@ namespace Dinamo2023.Api.Migrations
 
                     b.Property<string>("Brand")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("IdVehicleType")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.Property<string>("LicensePlate")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(7)
+                        .HasColumnType("nvarchar(7)");
 
                     b.Property<int>("Mileage")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.Property<int>("Model")
-                        .HasMaxLength(100)
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -377,8 +354,8 @@ namespace Dinamo2023.Api.Migrations
 
                     b.Property<string>("VehicleTypeName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("Id");
 
